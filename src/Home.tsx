@@ -16,16 +16,51 @@ import {
   awaitTransactionSignatureConfirmation,
   getCandyMachineState,
   mintOneToken,
-  shortenAddress,
 } from "./candy-machine";
+// Added imports
+import backgroundImage from './assets/background.jpg';
 
 const ConnectButton = styled(WalletDialogButton)``;
 
 const CounterText = styled.span``; // add your styles here
 
-const MintContainer = styled.div``; // add your styles here
+const MintContainer = styled.div`
+width: 30%;
+height: 30%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: #15e48a;
+
+font-family: 'Changa One';
+font-size: xx-large;
+text-align: center;
+`; // add your styles here
+
+const MainContainer = styled.div`
+  background-image: url(${backgroundImage});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+`; // add your styles here
 
 const MintButton = styled(Button)``; // add your styles here
+
+const ButtonContainer = styled(Button)`
+  height: 80%;
+`; // add your styles here
+
+const AirdogsLink = styled.div`
+font-family: 'Changa One';
+font-size: x-large;
+position: absolute;
+top: 5%;
+left: 5%;
+background-color: #15e48a;
+`
 
 export interface HomeProps {
   candyMachineId: anchor.web3.PublicKey;
@@ -37,7 +72,9 @@ export interface HomeProps {
 }
 
 const Home = (props: HomeProps) => {
+  const initialAmountOfNFTs = 5;
   const [balance, setBalance] = useState<number>();
+  const [remainingNFTs, setRemainingNFTs] = useState<number>();
   const [isActive, setIsActive] = useState(false); // true when countdown completes
   const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
@@ -139,6 +176,7 @@ const Home = (props: HomeProps) => {
           props.connection
         );
 
+      setRemainingNFTs(itemsRemaining);
       setIsSoldOut(itemsRemaining === 0);
       setStartDate(goLiveDate);
       setCandyMachine(candyMachine);
@@ -146,23 +184,19 @@ const Home = (props: HomeProps) => {
   }, [wallet, props.candyMachineId, props.connection]);
 
   return (
-    <main>
-      {wallet && (
-        <p>Address: {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
-      )}
-
-      {wallet && (
-        <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
-      )}
-
+    <MainContainer>
       <MintContainer>
+        <p>Minted NFTs: {remainingNFTs === undefined? "?" : (initialAmountOfNFTs-(remainingNFTs || 0)).toLocaleString()} / {initialAmountOfNFTs.toLocaleString()}</p>
         {!wallet ? (
-          <ConnectButton>Connect Wallet</ConnectButton>
+          <ButtonContainer>
+            <ConnectButton>Connect Wallet</ConnectButton>
+          </ButtonContainer>
         ) : (
-          <MintButton
-            disabled={isSoldOut || isMinting || !isActive}
-            onClick={onMint}
-            variant="contained"
+          <ButtonContainer><MintButton
+              disabled={isSoldOut || isMinting || !isActive}
+              onClick={onMint}
+              variant="contained"
+              color="primary"
           >
             {isSoldOut ? (
               "SOLD OUT"
@@ -180,11 +214,9 @@ const Home = (props: HomeProps) => {
                 renderer={renderCounter}
               />
             )}
-          </MintButton>
+          </MintButton></ButtonContainer>
         )}
-      </MintContainer>
-
-      <Snackbar
+        <Snackbar
         open={alertState.open}
         autoHideDuration={6000}
         onClose={() => setAlertState({ ...alertState, open: false })}
@@ -196,7 +228,11 @@ const Home = (props: HomeProps) => {
           {alertState.message}
         </Alert>
       </Snackbar>
-    </main>
+      </MintContainer>
+
+      <AirdogsLink><a href="https://www.airdogs.io">More info at our main page</a></AirdogsLink>
+        
+    </MainContainer>
   );
 };
 
