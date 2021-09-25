@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/candy-machine-mint/static/css/main.7d8f8f31.chunk.css",
-    "main.js": "/candy-machine-mint/static/js/main.5bfc2fb1.chunk.js",
-    "main.js.map": "/candy-machine-mint/static/js/main.5bfc2fb1.chunk.js.map",
-    "runtime-main.js": "/candy-machine-mint/static/js/runtime-main.3855ef19.js",
-    "runtime-main.js.map": "/candy-machine-mint/static/js/runtime-main.3855ef19.js.map",
-    "static/js/2.55e03081.chunk.js": "/candy-machine-mint/static/js/2.55e03081.chunk.js",
-    "static/js/2.55e03081.chunk.js.map": "/candy-machine-mint/static/js/2.55e03081.chunk.js.map",
-    "static/js/3.acdd0125.chunk.js": "/candy-machine-mint/static/js/3.acdd0125.chunk.js",
-    "static/js/3.acdd0125.chunk.js.map": "/candy-machine-mint/static/js/3.acdd0125.chunk.js.map",
-    "index.html": "/candy-machine-mint/index.html",
-    "static/css/main.7d8f8f31.chunk.css.map": "/candy-machine-mint/static/css/main.7d8f8f31.chunk.css.map",
-    "static/js/2.55e03081.chunk.js.LICENSE.txt": "/candy-machine-mint/static/js/2.55e03081.chunk.js.LICENSE.txt",
-    "static/media/background.231b882f.jpg": "/candy-machine-mint/static/media/background.231b882f.jpg"
+    "main.css": "/static/css/main.7d8f8f31.chunk.css",
+    "main.js": "/static/js/main.2741ace3.chunk.js",
+    "main.js.map": "/static/js/main.2741ace3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.fd7537bf.js",
+    "runtime-main.js.map": "/static/js/runtime-main.fd7537bf.js.map",
+    "static/js/2.af9a473f.chunk.js": "/static/js/2.af9a473f.chunk.js",
+    "static/js/2.af9a473f.chunk.js.map": "/static/js/2.af9a473f.chunk.js.map",
+    "static/js/3.acdd0125.chunk.js": "/static/js/3.acdd0125.chunk.js",
+    "static/js/3.acdd0125.chunk.js.map": "/static/js/3.acdd0125.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.7d8f8f31.chunk.css.map": "/static/css/main.7d8f8f31.chunk.css.map",
+    "static/js/2.af9a473f.chunk.js.LICENSE.txt": "/static/js/2.af9a473f.chunk.js.LICENSE.txt",
+    "static/media/background.231b882f.jpg": "/static/media/background.231b882f.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.3855ef19.js",
-    "static/js/2.55e03081.chunk.js",
+    "static/js/runtime-main.fd7537bf.js",
+    "static/js/2.af9a473f.chunk.js",
     "static/css/main.7d8f8f31.chunk.css",
-    "static/js/main.5bfc2fb1.chunk.js"
+    "static/js/main.2741ace3.chunk.js"
   ]
 }
