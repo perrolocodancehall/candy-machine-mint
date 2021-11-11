@@ -18,7 +18,7 @@ import {
   mintOneToken,
 } from "./candy-machine";
 // Added imports
-import backgroundImage from './assets/background.jpg';
+import backgroundImage from './assets/background.png';
 
 const ConnectButton = styled(WalletDialogButton)``;
 
@@ -31,9 +31,9 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-background-color: #15e48a;
+background-color: #323232;
 
-font-family: 'Changa One';
+font-family: 'EXO 2';
 font-size: xx-large;
 text-align: center;
 `; // add your styles here
@@ -53,13 +53,13 @@ const ButtonContainer = styled(Button)`
   height: 80%;
 `; // add your styles here
 
-const AirdogsLink = styled.div`
-font-family: 'Changa One';
+const MainLink = styled.div`
+font-family: 'EXO 2';
 font-size: x-large;
 position: absolute;
 top: 5%;
 left: 5%;
-background-color: #15e48a;
+background-color: #F9E52D;
 `
 
 export interface HomeProps {
@@ -72,10 +72,10 @@ export interface HomeProps {
 }
 
 const Home = (props: HomeProps) => {
-  const initialAmountOfNFTs = 5;
   const [balance, setBalance] = useState<number>();
-  const [remainingNFTs, setRemainingNFTs] = useState<number>();
-  const [isActive, setIsActive] = useState(false); // true when countdown completes
+  // const [remainingNFTs, setRemainingNFTs] = useState<number>();
+  // const [initialAmountOfNFTs, setInitialAmountOfNFTs] = useState<number>();
+  // const [isActive, setIsActive] = useState(false); // true when countdown completes
   const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
 
@@ -124,7 +124,6 @@ const Home = (props: HomeProps) => {
         }
       }
     } catch (error: any) {
-      // TODO: blech:
       let message = error.msg || "Minting failed! Please try again!";
       if (!error.msg) {
         if (error.message.indexOf("0x138")) {
@@ -169,16 +168,17 @@ const Home = (props: HomeProps) => {
     (async () => {
       if (!wallet) return;
 
-      const { candyMachine, goLiveDate, itemsRemaining } =
+      const { candyMachine, goLiveDate, itemsRemaining, itemsAvailable } =
         await getCandyMachineState(
           wallet as anchor.Wallet,
           props.candyMachineId,
           props.connection
         );
 
-      setRemainingNFTs(itemsRemaining);
-      setIsSoldOut(itemsRemaining === 0);
-      setStartDate(goLiveDate);
+      // setRemainingNFTs(itemsRemaining);
+      // setInitialAmountOfNFTs(itemsAvailable);
+      // setIsSoldOut(itemsRemaining === 0);
+      // setStartDate(goLiveDate);
       setCandyMachine(candyMachine);
     })();
   }, [wallet, props.candyMachineId, props.connection]);
@@ -186,33 +186,24 @@ const Home = (props: HomeProps) => {
   return (
     <MainContainer>
       <MintContainer>
-        <p>Minted NFTs: {remainingNFTs === undefined? "?" : (initialAmountOfNFTs-(remainingNFTs || 0)).toLocaleString()} / {initialAmountOfNFTs.toLocaleString()}</p>
+        <p>Mint your LAMBO, for 0.2 SOL!</p>
         {!wallet ? (
           <ButtonContainer>
             <ConnectButton>Connect Wallet</ConnectButton>
           </ButtonContainer>
         ) : (
           <ButtonContainer><MintButton
-              disabled={isSoldOut || isMinting || !isActive}
+              disabled={isSoldOut || isMinting}
               onClick={onMint}
               variant="contained"
               color="primary"
           >
             {isSoldOut ? (
               "SOLD OUT"
-            ) : isActive ? (
-              isMinting ? (
+            ) : isMinting ? (
                 <CircularProgress />
               ) : (
                 "MINT"
-              )
-            ) : (
-              <Countdown
-                date={startDate}
-                onMount={({ completed }) => completed && setIsActive(true)}
-                onComplete={() => setIsActive(true)}
-                renderer={renderCounter}
-              />
             )}
           </MintButton></ButtonContainer>
         )}
@@ -230,7 +221,7 @@ const Home = (props: HomeProps) => {
       </Snackbar>
       </MintContainer>
 
-      <AirdogsLink><a href="https://www.airdogs.io">More info at our main page</a></AirdogsLink>
+      <MainLink><a href="https://www.carsnft.club/">More info at our main page</a></MainLink>
         
     </MainContainer>
   );

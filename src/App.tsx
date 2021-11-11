@@ -48,7 +48,7 @@ const theme = createTheme({
     palette: {
         type: 'dark',
         primary: {
-          main: '#192024',
+          main: '#F9E52D',
         },
     },
     overrides: {
